@@ -1,0 +1,64 @@
+Imports Autodesk.AutoCAD.Runtime
+Imports Autodesk.AutoCAD.ApplicationServices
+Imports Autodesk.AutoCAD.Windows
+
+Public Class CustomUICommand
+    ' カスタムフォームのインスタンス
+    Private Shared customForm As Windows.Forms.Form = Nothing
+    
+    ' コマンドを定義
+    <CommandMethod("SHOWCUSTOMUI")>
+    Public Sub ShowCustomUI()
+        ' すでにフォームが開いている場合は閉じる
+        If customForm IsNot Nothing AndAlso Not customForm.IsDisposed Then
+            customForm.Close()
+            customForm = Nothing
+        End If
+        
+        ' 新しいフォームを作成
+        customForm = New CustomForm()
+        
+        ' AutoCADのメインウィンドウを親として設定
+        Dim acadWindow As IntPtr = Application.MainWindow.Handle
+        customForm.Show(New WindowWrapper(acadWindow))
+    End Sub
+End Class
+
+' カスタムフォームクラス
+Public Class CustomForm
+    Inherits System.Windows.Forms.Form
+    
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+    
+    Private Sub InitializeComponent()
+        Me.Text = "カスタムUI"
+        Me.Width = 400
+        Me.Height = 300
+        
+        ' ここにActiveXコントロールを追加
+        ' 例: ボタンの追加
+        Dim button As New System.Windows.Forms.Button()
+        button.Text = "実行"
+        button.Location = New System.Drawing.Point(10, 10)
+        Me.Controls.Add(button)
+    End Sub
+End Class
+
+' WindowsフォームをAutoCADに統合するためのラッパークラス
+Public Class WindowWrapper
+    Implements System.Windows.Forms.IWin32Window
+    
+    Private _hwnd As IntPtr
+    
+    Public Sub New(ByVal handle As IntPtr)
+        _hwnd = handle
+    End Sub
+    
+    Public ReadOnly Property Handle As IntPtr Implements System.Windows.Forms.IWin32Window.Handle
+        Get
+            Return _hwnd
+        End Get
+    End Property
+End Class

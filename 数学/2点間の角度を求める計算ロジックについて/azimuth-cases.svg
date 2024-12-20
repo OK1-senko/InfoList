@@ -1,0 +1,59 @@
+<svg viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- グリッドの背景 -->
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#eee" stroke-width="0.5"/>
+    </pattern>
+    <rect x="-300" y="-300" width="600" height="600" fill="url(#grid)"/>
+
+    <!-- 4つのグラフを配置 -->
+    <!-- 左上: X変化大・第1象限 -->
+    <g transform="translate(-150, -150)">
+        <line x1="-100" y1="0" x2="100" y2="0" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="-100" x2="0" y2="100" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="0" x2="70" y2="30" stroke="red" stroke-width="2"/>
+        <path d="M 0,0 A 30,30 0 0 1 30,0" fill="none" stroke="blue" stroke-width="1"/>
+        <text x="80" y="20" font-size="12">Case 1: |ΔX| ≥ |ΔY|</text>
+        <text x="80" y="35" font-size="12">θ = Atn(ΔY/ΔX)</text>
+        <circle cx="70" cy="30" r="3" fill="red"/>
+    </g>
+
+    <!-- 右上: X変化大・第2象限 -->
+    <g transform="translate(150, -150)">
+        <line x1="-100" y1="0" x2="100" y2="0" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="-100" x2="0" y2="100" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="0" x2="-70" y2="30" stroke="red" stroke-width="2"/>
+        <path d="M 0,0 A 30,30 0 0 1 30,0" fill="none" stroke="blue" stroke-width="1"/>
+        <path d="M 0,0 A 30,30 0 1 1 -30,0" fill="none" stroke="blue" stroke-width="1" stroke-dasharray="2"/>
+        <text x="-90" y="20" font-size="12">Case 2: |ΔX| ≥ |ΔY|</text>
+        <text x="-90" y="35" font-size="12">θ = Atn(ΔY/ΔX) + π</text>
+        <circle cx="-70" cy="30" r="3" fill="red"/>
+    </g>
+
+    <!-- 左下: Y変化大・第1象限 -->
+    <g transform="translate(-150, 150)">
+        <line x1="-100" y1="0" x2="100" y2="0" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="-100" x2="0" y2="100" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="0" x2="30" y2="-70" stroke="red" stroke-width="2"/>
+        <path d="M 0,0 A 30,30 0 0 1 30,0" fill="none" stroke="blue" stroke-width="1"/>
+        <text x="40" y="-60" font-size="12">Case 3: |ΔX| < |ΔY|</text>
+        <text x="40" y="-45" font-size="12">θ = π/2 - Atn(ΔX/ΔY)</text>
+        <circle cx="30" cy="-70" r="3" fill="red"/>
+    </g>
+
+    <!-- 右下: Y変化大・第4象限 -->
+    <g transform="translate(150, 150)">
+        <line x1="-100" y1="0" x2="100" y2="0" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="-100" x2="0" y2="100" stroke="black" stroke-width="1"/>
+        <line x1="0" y1="0" x2="30" y2="70" stroke="red" stroke-width="2"/>
+        <path d="M 0,0 A 30,30 0 0 1 30,0" fill="none" stroke="blue" stroke-width="1"/>
+        <path d="M 0,0 A 30,30 0 1 1 0,30" fill="none" stroke="blue" stroke-width="1" stroke-dasharray="2"/>
+        <text x="40" y="60" font-size="12">Case 4: |ΔX| < |ΔY|</text>
+        <text x="40" y="75" font-size="12">θ = π/2 - Atn(ΔX/ΔY) + π</text>
+        <circle cx="30" cy="70" r="3" fill="red"/>
+    </g>
+
+    <!-- 全体の説明 -->
+    <text x="-290" y="-280" font-size="14">北を基準（0°）とした方位角の計算パターン</text>
+    <text x="-290" y="-260" font-size="12">青実線: 計算で得られる角度</text>
+    <text x="-290" y="-245" font-size="12">青点線: π加算による補正</text>
+</svg>

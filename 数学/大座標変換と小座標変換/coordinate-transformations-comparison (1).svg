@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+    <!-- マーカー定義 -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#000"/>
+        </marker>
+        <marker id="arrowheadBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#0000FF"/>
+        </marker>
+    </defs>
+
+    <!-- タイトル -->
+    <text x="150" y="30" font-size="16" font-weight="bold">transToLocal2D</text>
+    <text x="600" y="30" font-size="16" font-weight="bold">transToGlobal2D</text>
+
+    <!-- 左側：transToLocal2D -->
+    <g transform="translate(50,50)">
+        <!-- グリッド線 -->
+        <path d="M0,0 H400 M0,100 H400 M0,200 H400 M0,300 H400" stroke="#eee" stroke-width="1"/>
+        <path d="M0,0 V300 M100,0 V300 M200,0 V300 M300,0 V300" stroke="#eee" stroke-width="1"/>
+        
+        <!-- 大座標系 -->
+        <path d="M0,250 H400" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M50,50 V300" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="380" y="270">X (大座標系)</text>
+        <text x="30" y="70">Y (大座標系)</text>
+        
+        <!-- 小座標系 -->
+        <path d="M100,200 L350,200" stroke="blue" stroke-width="2" transform="rotate(-30,100,200)" marker-end="url(#arrowheadBlue)"/>
+        <path d="M100,100 L100,300" stroke="blue" stroke-width="2" marker-end="url(#arrowheadBlue)"/>
+        <text x="320" y="220" fill="blue">x (小座標系)</text>
+        <text x="80" y="120" fill="blue">y (小座標系)</text>
+        
+        <!-- 点 -->
+        <circle cx="100" cy="200" r="4" fill="red"/>
+        <text x="70" y="220" fill="red">(x0,y0)</text>
+        <circle cx="250" cy="150" r="4" fill="green"/>
+        <text x="260" y="145" fill="green">(x1,y1): 入力</text>
+        <circle cx="180" cy="170" r="4" fill="purple"/>
+        <text x="190" y="165" fill="purple">(x2,y2): 出力</text>
+        
+        <!-- 回転角 -->
+        <path d="M100,200 A40,40 0 0 1 134,185" fill="none" stroke="orange" stroke-width="1"/>
+        <text x="120" y="180" fill="orange">rt0</text>
+        
+        <!-- 変換式 -->
+        <g transform="translate(0,320)">
+            <text x="0" y="20" font-size="12">計算手順:</text>
+            <text x="0" y="40" font-size="12">1. 平行移動: (x1-x0, y1-y0)</text>
+            <text x="0" y="60" font-size="12">2. 回転変換:</text>
+            <text x="0" y="80" font-size="12">x2 = (x1-x0)cos(rt0) + (y1-y0)sin(rt0)</text>
+            <text x="0" y="100" font-size="12">y2 = ((y1-y0)cos(rt0) - (x1-x0)sin(rt0)) * ifg</text>
+        </g>
+    </g>
+
+    <!-- 右側：transToGlobal2D -->
+    <g transform="translate(500,50)">
+        <!-- グリッド線 -->
+        <path d="M0,0 H400 M0,100 H400 M0,200 H400 M0,300 H400" stroke="#eee" stroke-width="1"/>
+        <path d="M0,0 V300 M100,0 V300 M200,0 V300 M300,0 V300" stroke="#eee" stroke-width="1"/>
+        
+        <!-- 大座標系 -->
+        <path d="M0,250 H400" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <path d="M50,50 V300" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="380" y="270">X (大座標系)</text>
+        <text x="30" y="70">Y (大座標系)</text>
+        
+        <!-- 小座標系 -->
+        <path d="M100,200 L350,200" stroke="blue" stroke-width="2" transform="rotate(-30,100,200)" marker-end="url(#arrowheadBlue)"/>
+        <path d="M100,100 L100,300" stroke="blue" stroke-width="2" marker-end="url(#arrowheadBlue)"/>
+        <text x="320" y="220" fill="blue">x (小座標系)</text>
+        <text x="80" y="120" fill="blue">y (小座標系)</text>
+        
+        <!-- 点 -->
+        <circle cx="100" cy="200" r="4" fill="red"/>
+        <text x="70" y="220" fill="red">(x0,y0)</text>
+        <circle cx="180" cy="170" r="4" fill="green"/>
+        <text x="190" y="165" fill="green">(x1,y1): 入力</text>
+        <circle cx="250" cy="150" r="4" fill="purple"/>
+        <text x="260" y="145" fill="purple">(x2,y2): 出力</text>
+        
+        <!-- 回転角 -->
+        <path d="M100,200 A40,40 0 0 1 134,185" fill="none" stroke="orange" stroke-width="1"/>
+        <text x="120" y="180" fill="orange">rt0</text>
+        
+        <!-- 変換式 -->
+        <g transform="translate(0,320)">
+            <text x="0" y="20" font-size="12">計算手順:</text>
+            <text x="0" y="40" font-size="12">1. 系の変換: syfg = y1 * ifg</text>
+            <text x="0" y="60" font-size="12">2. 回転変換:</text>
+            <text x="0" y="80" font-size="12">x2 = x1*cos(rt0) - syfg*sin(rt0) + x0</text>
+            <text x="0" y="100" font-size="12">y2 = syfg*cos(rt0) + x1*sin(rt0) + y0</text>
+        </g>
+    </g>
+
+    <!-- 共通の説明 -->
+    <g transform="translate(50,500)">
+        <text x="0" y="20" font-size="14" font-weight="bold">パラメータの説明:</text>
+        <text x="0" y="45" font-size="12">(x0,y0): 小座標系の原点位置</text>
+        <text x="0" y="65" font-size="12">rt0: 小座標系のX軸方位角</text>
+        <text x="0" y="85" font-size="12">ifg: 座標系の種類 (1:同一系, -1:数学系⇔測量系)</text>
+        <text x="400" y="45" font-size="12">transToLocal2D: 大座標系 → 小座標系への変換</text>
+        <text x="400" y="65" font-size="12">transToGlobal2D: 小座標系 → 大座標系への変換</text>
+    </g>
+</svg>

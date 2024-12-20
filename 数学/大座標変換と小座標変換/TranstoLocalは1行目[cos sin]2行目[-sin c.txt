@@ -1,0 +1,2 @@
+TranstoLocalは1行目[cos sin]2行目[-sin cos]
+TranstoGlobalは1行目[cos -sin]2行目[sin cos]で小座標変換で使用していた回転行列の逆行列を使用している
